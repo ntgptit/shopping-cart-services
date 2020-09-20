@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="com.giapnt.shopping.cart.reposiroty.SupplierRepository">
+	<select id ="findAll" resultType="com.giapnt.shopping.cart.model.Suppliers">
+		SELECT
+			id,
+			name,
+			code,
+			address,
+			city,
+			country,
+			phone,
+			email,
+			url,
+			payment_methods,
+			type_goods,
+			discount_type,
+			discount_available,
+			current_order,
+			notes,
+			is_active,
+			created_by,
+			updated_by,
+			created_timestamp,
+			updated_timestamp
+		FROM
+			core_data.suppliers
+		ORDER BY 
+			name,
+			code
+		<if test="@com.giapnt.shopping.cart.utils.validation.string.StringValidation@notEmpty(limit) and @com.giapnt.shopping.cart.utils.validation.string.StringValidation@notEmpty(offset)">
+			LIMIT #{limit}
+			OFFSET #{offset}
+		</if>
+	</select>
+	<select id="countAll" resultType="java.lang.Integer">
+		SELECT 
+			COUNT(*)
+		FROM
+			core_data.suppliers
+	</select>
+</mapper>
