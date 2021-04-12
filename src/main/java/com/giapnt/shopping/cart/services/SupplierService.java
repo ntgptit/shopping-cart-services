@@ -16,7 +16,7 @@ public interface SupplierService {
 	/**
 	 * Find all.
 	 *
-	 * @param pageNum the page num
+	 * @param pageNum  the page num
 	 * @param pageSize the page size
 	 * @return the page helper
 	 */
@@ -29,4 +29,13 @@ public interface SupplierService {
 	 * @return the suppliers
 	 */
 	Suppliers findById(String id);
+
+	/**
+	 * Creates the suppliers.
+	 *
+	 * @param suppliers the suppliers
+	 * @param userCreated the user created
+	 * @return the suppliers
+	 */
+	Suppliers createUser(Suppliers suppliers, String userCreated);
 }

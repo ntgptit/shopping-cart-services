@@ -14,7 +14,7 @@
 			email,
 			url,
 			payment_methods,
-			type_goods,
+			rank,
 			discount_type,
 			discount_available,
 			current_order,
@@ -29,15 +29,83 @@
 		ORDER BY 
 			name,
 			code
-		<if test="@com.giapnt.shopping.cart.utils.validation.string.StringValidation@notEmpty(limit) and @com.giapnt.shopping.cart.utils.validation.string.StringValidation@notEmpty(offset)">
-			LIMIT #{limit}
-			OFFSET #{offset}
-		</if>
+		LIMIT #{limit}
+		OFFSET #{offset}
 	</select>
 	<select id="countAll" resultType="java.lang.Integer">
 		SELECT 
 			COUNT(*)
 		FROM
 			core_data.suppliers
+	</select>
+	<insert id="create" parameterType="com.giapnt.shopping.cart.model.Suppliers">
+		INSERT INTO
+			core_data.suppliers 
+				(
+				id
+				,name
+				,code
+				,address
+				,city
+				,country
+				,phone
+				,email
+				,url
+				,payment_methods
+				,rank
+				,discount_type
+				,discount_available
+				,current_order
+				,notes,is_active
+				,created_by
+				,updated_by
+				,created_timestamp
+				,updated_timestamp
+				)
+		VALUES 
+				(
+				#{id, jdbcType = VARCHAR} 
+				,#{name, jdbcType = VARCHAR} 
+				,#{code, jdbcType = VARCHAR} 
+				,#{address, jdbcType = VARCHAR} 
+				,#{city, jdbcType = VARCHAR} 
+				,#{country, jdbcType = VARCHAR} 
+				,#{phone, jdbcType = VARCHAR} 
+				,#{email, jdbcType = VARCHAR}
+				,#{url, jdbcType = VARCHAR}
+				,#{paymentMethods, jdbcType = VARCHAR}
+				,#{rank, jdbcType = VARCHAR}
+				,#{discountType, jdbcType = VARCHAR}
+				,#{discountAvailable, jdbcType = INTEGER}
+				,#{currentOrder, jdbcType = VARCHAR}
+				,#{notes, jdbcType = VARCHAR}
+				,#{isActive, jdbcType = BIT}
+				,#{createdBy, jdbcType = VARCHAR}
+				,#{updatedBy, jdbcType = VARCHAR}
+				,#{createdTimestamp, jdbcType = TIMESTAMP}
+				,#{updatedTimestamp, jdbcType = TIMESTAMP}
+				)
+	</insert>
+	<select id="isExistedName" resultType="java.lang.Boolean" parameterType="java.lang.String">
+		SELECT EXISTS 
+		(
+			SELECT 
+				1
+			FROM 
+				core_data.suppliers cds
+			WHERE
+				cds.name = #{name}
+		)
+	</select>
+	<select id="isExistedCode" resultType="java.lang.Boolean" parameterType="java.lang.String">
+		SELECT EXISTS 
+		(
+			SELECT 
+				1
+			FROM 
+				core_data.suppliers cds
+			WHERE
+				cds.code = #{code}
+		)
 	</select>
 </mapper>

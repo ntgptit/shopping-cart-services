@@ -17,9 +17,18 @@
 			<property name="forceBigDecimals" value="false" />
 		</javaTypeResolver>
 		<javaModelGenerator
-			targetPackage="com.giapnt.shopping.cart.model"
+			targetPackage="mybatis_generator.model"
 			targetProject="shopping-cart-services">
 		</javaModelGenerator>
+		<sqlMapGenerator
+			targetPackage="mybatis_generator.xml"
+			targetProject="shopping-cart-services">
+			<property name="enableSubPackages" value="false" />
+		</sqlMapGenerator>
+		<javaClientGenerator
+			targetPackage="mybatis_generator.repository"
+			type="XMLMAPPER" targetProject="shopping-cart-services">
+		</javaClientGenerator>
 		<table schema="core_data" tableName="products"
 			enableCountByExample="false" enableDeleteByExample="false"
 			enableSelectByExample="false" enableUpdateByExample="false" />

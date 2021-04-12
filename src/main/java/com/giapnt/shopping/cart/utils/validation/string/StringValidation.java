@@ -17,7 +17,7 @@ public class StringValidation {
 	}
 
 	/**
-	 * Not empty.
+	 * Checks if is empty.
 	 *
 	 * @param object the object
 	 * @return check all blank result for object
@@ -26,6 +26,6 @@ public class StringValidation {
 		if (object == null) {
 			return false;
 		}
-		return StringUtils.isAllBlank(object.toString());
+		return StringUtils.isNotBlank(object.toString());
 	}
 }
